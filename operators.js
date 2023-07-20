@@ -13,4 +13,3 @@ if (isValidID && age == 18) { // == only compares data not type
 //using ternary 
 // condition ? when true : when false
 isValidID && age === 18 ? console.log("Is Valid Voter") : console.log("Is Not a Valid Voter")
-
