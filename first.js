@@ -11,3 +11,6 @@ function display() {
 }
 
 display();
+
+var myName = "Some Name";
+var myName = "Some Name";
