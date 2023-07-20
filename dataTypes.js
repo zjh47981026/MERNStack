@@ -31,3 +31,12 @@ checkDataType = {
 }
 console.log("Data type is - " + typeof checkDataType);
 console.log("Data is - ",  checkDataType)
+
+console.log("Data is - " + JSON.stringify(checkDataType))
+
+
+//ES6 has new type symbol
+var myData = Symbol("some value")
+
+console.log("Data type is - " + typeof myData)
+console.log("Data is - ", myData)
