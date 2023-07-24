@@ -3,7 +3,7 @@
 var age = "18"
 var isValidID = "Voter ID"
 
-if (isValidID && age == 18) { // == only compares data not type
+if (isValidID && age == 18) { // == only compares data not type 
     //=== compares data as well as type
     console.log("Is Valid Voter")
 } else {

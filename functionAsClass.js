@@ -51,4 +51,5 @@ objOfFuncConstructor.getUserDetails = function (isAdmin) {
 objOfFuncConstructor.getUserDetails()
 
 
+
 //create a constructor function to print user details add one information using prototype
