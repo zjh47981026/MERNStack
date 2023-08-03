@@ -1,0 +1,6 @@
+var car = {
+    make : "Honda",
+    color: "white"
+}
+
+module.exports={car};

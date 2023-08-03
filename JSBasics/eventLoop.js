@@ -13,12 +13,12 @@ setTimeout(function name (){
 setTimeout(function name (){
     console.log("Second Call back")
     
-}, 2000)  //2 sec
+}, 1000)  //2 sec
 
 
 setTimeout(function name (){
     console.log("Third Call back")
     
-}, 3000) //3 sec
+}, 1000) //3 sec
  
 console.log("Execution Ends")

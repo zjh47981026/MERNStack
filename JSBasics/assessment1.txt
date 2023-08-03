@@ -1,0 +1,141 @@
+//Q1. Create a file with name basics and show all the features that you know about javascript
+var _a = 10;
+_a = "abc";
+var $b = 20;
+$b = true;
+$b = Object;
+
+{
+    let _a = 10;
+    const b = 10;
+}
+
+
+//Q2. As javascript is not a type safe and has auto cast feature - try showing below values from the same variable
+// and its type as well :values are - "Robert ", .0266, false, {myname : "Test Me"}, 25166665, undefined, true, "Robert Jr.", null, {}, -32767
+
+var value = "Robert";
+console.log("value is: " + value + " of type: " + typeof value);
+value = .0266;
+console.log("value is: " + value + " of type: " + typeof value);
+value = false;
+console.log("value is: " + value + " of type: " + typeof value);
+value = {myname: "Test Me"};
+console.log("value is: " + value + " of type: " + typeof value);
+value = 25166665;
+console.log("value is: " + value + " of type: " + typeof value);
+value = undefined;
+console.log("value is: " + value + " of type: " + typeof value);
+value = true;
+console.log("value is: " + value + " of type: " + typeof value);
+value = "Robert Jr.";
+console.log("value is: " + value + " of type: " + typeof value);
+value = null;
+console.log("value is: " + value + " of type: " + typeof value);
+value = {};
+console.log("value is: " + value + " of type: " + typeof value);
+value = -32767;
+console.log("value is: " + value + " of type: " + typeof value);
+
+
+//Q3. Create a function with name show user info, this function expects three params, firstname, lastname and age
+//  print all the details in the given function
+function func(firstname, lastname, age) {
+    console.log(`First Name -> ${firstname}
+                Last Name -> ${lastname}
+                age -> ${age}`);
+}
+func('J', 'Z', 20);
+
+//Q4. Create a function with name doaddition, pass three parameters and return the sum of all the three numbers
+// below output needs to be monitored - add(2,3,4), add(2), add(2.3,3), add("first", 2, "three")
+// analyse the outputs we got and try explaining the reasons behind
+function doAddition(num1, num2, num3) {
+    return num1 + num2 + num3;
+}
+console.log(doAddition(2, 3, 4));  //result 9, the function just beheave the way it should be
+
+console.log(doAddition(2));  // result NaN, since there are two parameters are missing, so the result is NaN
+
+console.log(doAddition(2.3, 3)); //result NaN, since there are one parameters missing, so the result is NaN
+
+console.log(doAddition("first", 2, "three")); //result is a string "first2three", since we passed in two string parameters
+//so the function did string concatenation
+
+
+
+//Q5. A detailed example implementation of event loop using multiple settimeouts
+console.log("Execution Begins!")
+
+setTimeout(function name () {
+    console.log('first setInterval Call');
+    setTimeout(function name() {
+        console.log('first setInterval Inner')
+    }, 0)
+}, 1000);
+
+setTimeout(function name () {
+    console.log('Second setInterval Call')
+}, 1000);
+
+setTimeout(function name () {
+    console.log('Third setInterval Call')
+}, 1000)
+
+console.log("Execution ends!!");
+
+
+//Q6. Print the topics you remember so far exporting it from one file and printing in another
+
+
+
+//Q7. Give me an example of your choice on closure, callback, prototype, each.
+//closuree
+function parent(name, age) {
+    var _name = name
+    var _age = age 
+    var balance = "$1000"
+    var password="123"
+    var child = function(acctNo, passWd) {
+        return {
+            Name : _name,
+            Age : _age,
+            AccountNumber : acctNo,
+            balance
+        }
+    }
+    return child;
+}
+
+var acct = parent("abc", 20);
+console.log(acct(123, 123));
+
+//callback
+function func1 (name, age) {
+    console.log(`Name: ${name}
+                Age: ${age}`);
+}
+
+function func2 (func, name, age) {
+    func(name, age);
+}
+
+func2(func1, 'abc', 20);
+
+//prototype
+
+var obj = {
+    name : "abc",
+    age : 20,
+    major:"CS",
+    getDetails : function () {
+        return {
+            name : this.name,
+            age : this.age,
+        }
+    }
+}
+
+console.log(obj.__proto__);
+
+

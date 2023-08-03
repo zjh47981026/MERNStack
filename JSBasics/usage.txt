@@ -1,0 +1,4 @@
+
+var varCar = require("./module");
+
+console.log(varCar);
