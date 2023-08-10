@@ -21,6 +21,8 @@ console.log(AddArrow(9, 1))
 let User = {
     FirstName : "David",
     Session: "Arrow Function - ES6",
+    //if changed to arrow function here, this becomes global context
+    //and output of both functions will be undefined
     getInfo : function () {
         console.log(`
             ${this.FirstName}
