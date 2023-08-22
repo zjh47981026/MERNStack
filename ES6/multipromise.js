@@ -73,8 +73,6 @@ console.log("Promises are working... ")
         getusercart]
     ).then((data)=>{
         console.log("then ", data)
-    }).catch((err)=>{
-        console.log("catch ",err)
     })
 
 */
