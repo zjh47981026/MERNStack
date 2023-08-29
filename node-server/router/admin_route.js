@@ -1,0 +1,14 @@
+const express = require('express');
+
+const router = express.Router({caseSensitive : true});
+
+router.get('Hello', (req, res) => {
+    res.send('<h1>Hello From Admin</h1>')
+})
+
+
+router.get("/router", (req, res) => {
+    res.send('<h3> Express Router helps removing the burden of route table from main Application !! </h1>')
+})
+
+module.exports = router;
