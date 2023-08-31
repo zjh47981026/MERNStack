@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router({caseSensitive : true});
 
-router.get('Hello', (req, res) => {
+router.get('/hello', (req, res) => {
     res.send('<h1>Hello From Admin</h1>')
 })
 

@@ -2,7 +2,12 @@ const express = require("express"); //importing the express module references
  
 //We can use multiple express applications by mounting them on main app
 const adminApp = express();
-const adminRoute = require(".router/admin_route");
+const adminRoute = require("./router/admin_route");
+//instantiating express top method which returns application
+const app = express(); 
+
+const hostApp = express();
+const hostRoute = require("./router/host_router");
 
 
 //4 Major pillars of express
@@ -17,8 +22,6 @@ const adminRoute = require(".router/admin_route");
 app.use("/static", express.static('public'));
 
 
-//instantiating express top method which returns application
-const app = express(); 
 
 console.log("We are in server.js")
 
@@ -40,12 +43,13 @@ app.get('/routeprm/:name/info', function(req, res) {
 })  
 
 //can return html
-app.get('html', function(req, res) {
-    let query = req.query("name");
+app.get('/html', function(req, res) {
     res.send('<h1>Welcome to MERNStack session <h1>');
 })
 
-app.get('file', function(req, res) {
+
+
+app.get('/file', function(req, res) {
     res.sendFile(__dirname + "/public/index.html");
 })
 
@@ -53,6 +57,17 @@ app.get('/alert.js', function(req, res) {
     res.sendFile(__dirname+"/public/alert.js");
 })
 
+
+app.get('/myapi', function(req, res) {
+    let firstName = req.query['firstname'];
+    let lastName = req.query['lastname'];
+    let addr = req.query['address'];
+    res.json({
+        "firstname" : firstName,
+        "lastname" : lastName,
+        "address" : addr
+    });
+})
 
 
 app.get('/helloapi', function (req, res) {
@@ -68,6 +83,10 @@ app.get('/helloapi', function (req, res) {
 
 //redirect all requests with /admin path to adminApp
 app.use('/admin', adminApp);
+
+app.use('/host', hostApp);
+
+hostApp.use('/', hostRoute);
 
 //mounted admin app
 /*
