@@ -8,10 +8,11 @@
 //step7: define apis
 const express = require("express");
 const myApp = express();
+const PORT = 9000;
 //2. Create an API named getInfo with server.js as main file and configure using nodemon
 
 myApp.get('/getInfo', (req, res) => {
-    res.sendFile(__dirname+"/server.js");
+    return res.status(200).send({message : "This is getInfo API"});
 })
 
 //3. Explain the purpose of express elements - Application, Request, Response and Router
@@ -29,22 +30,61 @@ Without this file, each developer may have different versions of dependencies
 */
 
 //5. Create an api name getVaccine with get method, pass info like - vaccineName, price, doses
+const fs = require('fs').promises;
+const filePath =  "./data.json";
 
-myApp.get('/getVaccine', function(req, res) {
-    const vname = req.query['vaccineName'];
-    const price = req.query['price'];
-    const doses = req.query['doses'];
+const readJsonFile = async (filePath) => {
+    try {
+        const data = await fs.readFile(filePath, "UTF-8");
+        return JSON.parse(data);
+    } catch (error) {
+        if (error.code === "ENOENT") {
+            return []; // return an empty array if the file does not exist 
+        }
+        throw error;
+    }
+}
 
-    res.json({
-        "vaccineName" : vname,
+const writeJsonFile = async (jsonArray) => {
+    try {
+        await fs.writeFile(filePath, JSON.stringify(jsonArray, null, 2), "utf8");
+    } catch (error) {
+        console.log("Error writing file", error);
+    }
+
+};
+
+myApp.get('/getVaccine', async function(req, res) {
+    const { vaccineName, price, doses} = req.query;
+    if (!vaccineName || !price || !doses) {
+        return res.status(400).send( {
+            status: "Failed",
+            message: "Some parameters are misssing. Please Check",
+        });
+    }
+    const newVaccine = {
+        "vaccineName" : vaccineName,
         "price" : price,
-        "doses" : doses
-    });
+        "doses" : doses,
+    }
+    
+    try  {
+        const vaccines = await readJsonFile(filePath);
+        vaccines.push(newVaccine);
+        await writeJsonFile(vaccines);
+        return res.status(200).send({
+            status : "Success",
+            ...newVaccine,
+        })
 
-    res.send(`vaccineName : ${vname}
-                    price : ${price}
-                    doses : ${doses}`);
-})
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).send({
+            status : "Error",
+            message: "An error occured while processing your request.",
+        });
+    }
+});
 
 //6. What is the purpose of RESTFul API and what specifications are must to make a service RESTFul
 /*
@@ -68,8 +108,16 @@ vaccineApp.get('/', (req, res) => {
     res.send("<h1>vaccineApp</h1>");
 })
 
+myApp.get('*', (req, res) => {
+    res.send("<h1>The api is not ready</h1>");
+})
+
 
 //8. Create an API to demonstrate route param usage like - getVaccineByID 
-const router = require("router");
-const vaccineRouter = require('router');
+const router = require("./router");
 vaccineApp.use('/getVaccineByID', router);
+
+
+myApp.listen(PORT, () => {
+    console.log(`server launched on port ${PORT} `);
+})
