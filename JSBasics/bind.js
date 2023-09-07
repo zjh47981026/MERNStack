@@ -12,7 +12,7 @@ var user = {name:"Thahn Le",
                     console.log(`${_this.age} ${_this.session}`)
                 }, 2000);  */
 
-                //using bing method  more standard way
+                //using bind method  more standard way
                 setTimeout(function() {
                     console.log("inside setTimeout");
                     console.log(`${_this.age} ${_this.session}`)
