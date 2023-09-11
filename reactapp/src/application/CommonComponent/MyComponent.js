@@ -1,12 +1,12 @@
 import React from "react";
 
-let Header = (props) => {
+let MyComponent = (props) => {
     return (
         //only one top component allowed
         <>
-            <h2>Header Component</h2>
+            <h5>My Component</h5>
         </>
     )
 }
 
-export default Header;
+export default MyComponent;
