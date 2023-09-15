@@ -11,6 +11,10 @@ export default class HomeComponent extends Component {
         //Ref - elements work out of scope of react renderer, as free html element
         this.userNameRef = React.createRef();
         this.userAddressRef = React.createRef();
+
+        this.counter = 1;
+        this.counterInterval;
+        this.initializeTicks();
     }
 
     textChange = (evt)=>{
@@ -60,6 +64,21 @@ export default class HomeComponent extends Component {
 
 
         evt.preventDefault();
+    }
+
+    initializeTicks = ()=>{
+        this.counterInterval = setInterval(() => {
+            console.log("Logging the counter "+ this.counter++)
+        }, 2000);
+    }
+
+    //destruction life cycle method
+    componentWillUnmount(){
+        //delete all subscriptions from the component
+        //stop any api call
+        console.log("Component Will Unmount!!!")
+
+        clearInterval(this.counterInterval)
     }
 
     render(){
