@@ -58,12 +58,12 @@ export default class Success extends Component {
 
 //6. create a functional component SuccessChild, make it child of Success and pass Name and Address to it from Success
 let SuccessChild = (props) => {
-    let { SuccessStory } = props;
+    
     return(
         <>
             <h4>Name : {props.name}</h4>
             <h4>Address: {props.address}</h4>
-            <SuccessStory/>
+            {props.component}
         </>
     )
 }
