@@ -49,7 +49,7 @@ export default class Success extends Component {
             <p>One of the lessons that I grew up with was to always stay true to yourself and 
                 never let what somebody else says distract you from your goals
             </p>
-            <SuccessChild name={"abc"} address={"somewhere"} component={SuccessStory}
+            <SuccessChild name={"abc"} address={"somewhere"} component={<SuccessStory />}
             callBackFunc={this.executedByChild}/>
             </>
         )
