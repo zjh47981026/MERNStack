@@ -16,7 +16,8 @@ the navigation in the application without page reloads, providing seamless user 
 */
 //3. what is virtual dom
 /*
-    The virtual dom is a lightweight copy of the actual DOM. 
+    The virtual dom is a lightweight copy of the actual DOM. It is a virtual representation of a UI kept
+    in memory
 */
 //4. how react renders dom in conservative manner
 /*
