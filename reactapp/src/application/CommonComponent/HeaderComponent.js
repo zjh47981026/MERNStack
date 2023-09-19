@@ -6,9 +6,8 @@ let Header = (props)=>{
     let goAboutHook = useNavigate(); //hook - an inbuilt feature to navigate at other page
 
     let goToAboutClick = (evt)=>{
-        
+        // navigates user to certain link on the fly!!
         goAboutHook("/about/2023")
-
         evt.preventDefault();
     }
 

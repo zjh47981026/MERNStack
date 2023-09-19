@@ -1,6 +1,8 @@
 import React, {Component} from "react";
-
-export default class HomeComponent extends Component {
+//PureComponent has inbuilt implementation of shouldComponentUpdate()
+export default class HomeComponent extends PureComponent {
+//export default class HomeComponent extends Component {
+    //creation lifecycle method
     constructor(props){
         super(props)
         this.state = {
@@ -11,11 +13,59 @@ export default class HomeComponent extends Component {
         //Ref - elements work out of scope of react renderer, as free html element
         this.userNameRef = React.createRef();
         this.userAddressRef = React.createRef();
-
+        //not allowed, since the html element is not rendered yet
+        //we can not access html element before dom creation 
+        //as render method is not called yet
+       // this.userNameRef.current.value = "Initial user name"
         this.counter = 1;
         this.counterInterval;
         this.initializeTicks();
     }
+    getSnapshotBeforeUpdate(prevState, prevProps) {
+        console.log("getSnapShotBeforeUpdate");
+        console.log("prevState", prevState);
+        console.log("prevProps", prevProps);
+        return {
+            prevState,
+            prevProps
+        }
+    }
+
+    componentDidUpdate(prevState, prevProps) {
+        console.log("componentDidUpdate");
+        console.log("prevState", prevState);
+        console.log("prevProps", prevProps);
+    }
+
+    //we need implement componentDidMount() to change values 
+    componentDidMount() {
+        console.log("component is mounted on browser/dom created");
+        //we can access html once component is mounted
+        this.userNameRef.current.value = "Initial user name"
+        this.userAddressRef.current.value = "Initial user address"
+        setTimeout(()=> {
+            //cursor goes to here after 3s
+            this.userNameRef.current.focus()
+        }, 3000)
+    }
+
+    //update lifecycle method- decides whether re-render should happen or not
+   /* shouldComponentUpdate(nextProps, nextState) {
+        console.log(nextProps, nextState);
+        if (nextState.uName=== this.state.uName && nextState.uState ===this.state.uState) {
+            return false; //no need to call the render method as states are the same
+        } else {
+            return true;
+        }
+
+        //if want to render should return true
+        //return true
+        //if return false render is not allowed but value is there
+    }  
+ */
+
+
+
 
     textChange = (evt)=>{
 
@@ -80,7 +130,7 @@ export default class HomeComponent extends Component {
 
         clearInterval(this.counterInterval)
     }
-
+    //creation and update lifecycle method 
     render(){
         
         return(
@@ -108,6 +158,7 @@ export default class HomeComponent extends Component {
 
                     <button type="submit" >Save</button>
                 </form>
+                {this.props.component}
             </>
         )
     }
