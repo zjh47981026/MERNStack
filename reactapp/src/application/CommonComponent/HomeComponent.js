@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, PureComponent} from "react";
 //PureComponent has inbuilt implementation of shouldComponentUpdate()
 export default class HomeComponent extends PureComponent {
 //export default class HomeComponent extends Component {
@@ -19,8 +19,22 @@ export default class HomeComponent extends PureComponent {
        // this.userNameRef.current.value = "Initial user name"
         this.counter = 1;
         this.counterInterval;
-        this.initializeTicks();
+      //  this.initializeTicks();
     }
+
+    //we need implement componentDidMount() to change values 
+    componentDidMount() {
+        console.log("component is mounted on browser/dom created");
+        //we can access html once component is mounted
+        this.userNameRef.current.value = "Initial user name"
+        this.userAddressRef.current.value = "Initial user address"
+        setTimeout(()=> {
+            //cursor goes to here after 3s
+            this.userNameRef.current.focus()
+        }, 3000)
+    }
+
+
     getSnapshotBeforeUpdate(prevState, prevProps) {
         console.log("getSnapShotBeforeUpdate");
         console.log("prevState", prevState);
@@ -35,18 +49,6 @@ export default class HomeComponent extends PureComponent {
         console.log("componentDidUpdate");
         console.log("prevState", prevState);
         console.log("prevProps", prevProps);
-    }
-
-    //we need implement componentDidMount() to change values 
-    componentDidMount() {
-        console.log("component is mounted on browser/dom created");
-        //we can access html once component is mounted
-        this.userNameRef.current.value = "Initial user name"
-        this.userAddressRef.current.value = "Initial user address"
-        setTimeout(()=> {
-            //cursor goes to here after 3s
-            this.userNameRef.current.focus()
-        }, 3000)
     }
 
     //update lifecycle method- decides whether re-render should happen or not
@@ -122,7 +124,7 @@ export default class HomeComponent extends PureComponent {
         }, 2000);
     }
 
-    //destruction life cycle method
+    //destruction lifecycle method
     componentWillUnmount(){
         //delete all subscriptions from the component
         //stop any api call
@@ -155,7 +157,6 @@ export default class HomeComponent extends PureComponent {
                     <input type="text" ref={this.userNameRef} ></input>
                     <b>Address</b>
                     <input type="text" ref={this.userAddressRef} ></input>
-
                     <button type="submit" >Save</button>
                 </form>
                 {this.props.component}
