@@ -1,14 +1,12 @@
 import * as ActionTypes from "../actionTypes"
 import axios from "axios";
 
-export const AddProductToStore = (newProduct) => {
+export const AddProductToStore = (products) => {
     return {
         type : ActionTypes.AddProductToStore,
-        payload : newProduct
+        payload : {products}
     }
 }
-
-
 
 export const saveProductToDb = (product)=>{
     // thunk - makes it behave synchronously
@@ -29,5 +27,19 @@ export const saveProductToDb = (product)=>{
            .catch((err)=>{
                console.log(err)
            })
+    }
+}
+
+export const fetchProducts = () => { 
+    console.log("Product ");
+
+    return (dispatch) => {
+        axios.get("http://localhost:9000/product/api/getProducts")
+        .then((products) => {
+            dispatch(AddProductToStore(products));
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 }

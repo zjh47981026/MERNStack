@@ -1,10 +1,12 @@
 import * as ActionTypes from "../actionTypes";
 
 const Initial_State = {
-    product : {
+    products:[],
+    defaultProduct : {
         name : "default name",
+        category: "default category",
         price : 0,
-        desc : "default desciption",
+        description : "default desciption",
         rating : 0
     }
 }
@@ -13,7 +15,7 @@ const Initial_State = {
 let ProductReducer = (state = Initial_State, action) => {
     switch (action.type) {
         case ActionTypes.AddProductToStore :
-            return {...state, Product : action.payload}
+            return {...state, Product : action.payload.products}
         default : 
             return state
     }

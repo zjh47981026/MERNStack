@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from  "react-redux";
 import { saveProductToDb } from "../../../state/Product/ProductAction";
 
-let Product = (props) => {
+let ProductComponent = (props) => {
     let productDetail = useSelector((store) => store.productReducer.Product)
     let [productName, setProductName] = useState(productDetail.name);
     let [productPrice, setProductPrice] = useState(productDetail.price);
-    let [productDesc, setProductDesc] = useState(productDetail.desc);
+    let [productDesc, setProductDesc] = useState(productDetail.description);
     let [productRating, setProductRating] = useState(productDetail.rating);
+    let [productCategory, setProductCategory] = useState(productDetail.category);
 
     let dispatchToDb = useDispatch();
 
@@ -24,6 +25,8 @@ onTextChange = (evt) => {
         setProductDesc(val);
     } else if (classList.contains("rating")) {
         setProductRating(val);
+    } else if (classList.contains("category")) {
+        setProductCategory(val);
     }
 
     evt.preventDefault();
@@ -32,8 +35,9 @@ onTextChange = (evt) => {
 let readFormData = (evt) => {
       let product = {
         name : productName,
+        category : productCategory,
         price : productPrice,
-        desc : productDesc,
+        description : productDesc,
         rating : productRating
       }
 
@@ -53,13 +57,19 @@ let readFormData = (evt) => {
                  </label>  
                  <br/>
                  <label>
+                     <b>Category :</b>
+                     <input type = "text" className={"form-control col-md-12 category"} value={productCategory}
+                      onChange={onTextChange}  placeholder ="Please enter product category" maxLength={20} required/>
+                </label>
+                 <br/>
+                 <label>
                      <b>Price : </b>
                      <input type = "text" className={"form-control col-md-12 price"} value={productPrice}
                       onChange={onTextChange}  placeholder ="Please enter product price" maxLength={20} required/>
                 </label>
                 <br/>
                 <label>
-                     <b>Desc :</b>
+                     <b>Description :</b>
                      <input type = "text" className={"form-control col-md-12 desc"} value={productDesc}
                       onChange={onTextChange}  placeholder ="Please enter product desc" maxLength={20} required/>
                 </label>
@@ -69,8 +79,9 @@ let readFormData = (evt) => {
                       <input type = "text" className={"form-control col-md-12 rating"} value={productRating}
                       onChange={onTextChange}  placeholder ="Please enter product rating" maxLength={20} required/>  
                 </label>  
+                <input type="submit" className={"btn btn-primary"} value="Add To Item"/>
             </form>
         </>)  
 }
 
-export default Product
+export default ProductComponent

@@ -4,7 +4,7 @@
 import * as ActionTypes from "../actionTypes";
 
 const Initial_State = {
-    user : {
+    User : {
         userName : "Jeffery",
         password : "nhi",
         street : "new york",

@@ -25,3 +25,5 @@ productRoute.post("/api/saveProduct", (req, res) => {
         res.send("Product existed!");
     })
 })
+
+module.exports = productRoute;

@@ -43,7 +43,7 @@ export default class MyComponent3 extends Component {
     textChange = (evt) => {
         let target = evt.target;
         let val = target.value;
-        console.log(value);
+        console.log(val);
         this.setState({
             value : val
         })
